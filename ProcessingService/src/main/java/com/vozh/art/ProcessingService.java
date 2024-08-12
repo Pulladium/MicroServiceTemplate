@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SimpleService {
+public class ProcessingService {
     public static void main(String[] args) {
-        SpringApplication.run(SimpleService.class);
+        SpringApplication.run(ProcessingService.class);
     }
 }
