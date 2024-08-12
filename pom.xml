@@ -17,6 +17,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>Gateway</module>
+        <module>SimpleService</module>
     </modules>
 
     <properties>
