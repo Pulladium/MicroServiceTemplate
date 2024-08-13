@@ -2,12 +2,11 @@ package com.vozh.art;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients
 @SpringBootApplication
-public class ProcessingApplication {
+public class DataServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ProcessingApplication.class);
+
+        SpringApplication.run(DataServiceApplication.class);
     }
 }
