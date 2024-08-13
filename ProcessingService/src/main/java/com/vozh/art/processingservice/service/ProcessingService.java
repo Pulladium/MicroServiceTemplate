@@ -1,7 +1,7 @@
-package com.vozh.art.service;
+package com.vozh.art.processingservice.service;
 
-import com.vozh.art.dto.DataItemRequest;
-import com.vozh.art.webclient.DataServiceClient;
+import com.vozh.art.common.dto.DataItemRequest;
+import com.vozh.art.processingservice.webclient.DataServiceClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

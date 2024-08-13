@@ -1,15 +1,11 @@
-package com.vozh.art.controller;
+package com.vozh.art.processingservice.controller;
 
-import com.vozh.art.dto.DataItemRequest;
-import com.vozh.art.dto.request.TaskRequest;
-import com.vozh.art.dto.response.TaskResponse;
-import com.vozh.art.service.ProcessingService;
+import com.vozh.art.common.dto.DataItemRequest;
+import com.vozh.art.processingservice.service.ProcessingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController

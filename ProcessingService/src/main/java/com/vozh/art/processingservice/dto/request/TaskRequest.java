@@ -1,4 +1,4 @@
-package com.vozh.art.dto.request;
+package com.vozh.art.processingservice.dto.request;
 
 import java.time.LocalDateTime;
 

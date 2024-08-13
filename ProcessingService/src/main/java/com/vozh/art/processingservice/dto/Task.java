@@ -1,4 +1,4 @@
-package com.vozh.art.dto;
+package com.vozh.art.processingservice.dto;
 
 
 

@@ -1,4 +1,4 @@
-package com.vozh.art.entity;
+package com.vozh.art.dataservice.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -20,6 +20,7 @@
         <module>ProcessingService</module>
         <module>DataService</module>
         <module>CommonDto</module>
+        <module>EurekaServer</module>
     </modules>
 
     <properties>
