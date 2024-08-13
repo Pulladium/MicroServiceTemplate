@@ -18,6 +18,8 @@
     <modules>
         <module>Gateway</module>
         <module>ProcessingService</module>
+        <module>DataService</module>
+        <module>CommonDto</module>
     </modules>
 
     <properties>
