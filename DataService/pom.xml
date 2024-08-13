@@ -35,6 +35,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.vozh.art</groupId>
             <artifactId>CommonDto</artifactId>
             <version>1.0-SNAPSHOT</version>
