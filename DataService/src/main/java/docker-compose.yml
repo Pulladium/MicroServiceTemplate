@@ -1,0 +1,26 @@
+version: '4'
+
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_DB: "TemplateDB"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: spring-boot-app
+    ports:
+      - "8443:8443"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/yourdatabase
+      SPRING_DATASOURCE_USERNAME: youruser
+      SPRING_DATASOURCE_PASSWORD: yourpassword
+    depends_on:
+      - postgres
+
