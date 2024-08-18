@@ -2,6 +2,7 @@ package com.vozh.art.dataservice.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class DataItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +19,6 @@ public class DataItem {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "item_amount",nullable = false)
     private String value;
 }
