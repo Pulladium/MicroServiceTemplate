@@ -19,4 +19,8 @@ public class ProcessingController {
         processingService.processDataItem(request);
         return ResponseEntity.ok("Successfully sent for saving");
     }
+    @GetMapping("/test")
+    public ResponseEntity<String> testProcessingApi(){
+        return ResponseEntity.ok("Processing service test");
+    }
 }
