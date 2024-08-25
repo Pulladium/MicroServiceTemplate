@@ -1,13 +1,13 @@
-package com.vozh.art;
+package com.vozh.art.notificationservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.swing.*;
-
 @SpringBootApplication
-public class GatewayApplication {
+public class NotificationServiceApplication {
+
     public static void main(String[] args) {
-        SpringApplication.run(GatewayApplication.class);
+        SpringApplication.run(NotificationServiceApplication.class, args);
     }
+
 }
