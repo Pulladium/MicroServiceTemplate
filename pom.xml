@@ -12,15 +12,16 @@
     </parent>
 
     <groupId>com.vozh.art</groupId>
-    <artifactId>MicroServiceTemplate</artifactId>
+    <artifactId>microservice-tmpl</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>Gateway</module>
-        <module>ProcessingService</module>
-        <module>DataService</module>
-        <module>CommonDto</module>
-        <module>EurekaServer</module>
+        <module>gateway-react</module>
+        <module>data-service-mvc-tmpl</module>
+        <module>common-module</module>
+        <module>eureka-server</module>
+        <module>processing-service-mcv-tmpl</module>
+        <module>notification-service-mcv-tmpl</module>
     </modules>
 
     <properties>
@@ -28,6 +29,8 @@
         <maven.compiler.target>17</maven.compiler.target>
         <spring-cloud.version>2023.0.3</spring-cloud.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+
     </properties>
 
     <dependencyManagement>
@@ -38,6 +41,12 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -55,6 +64,27 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+
+                    <image>
+                        <name>pulkabulky/micros-template:${project.artifactId}${project.version}</name>
+                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>
+                        <publish>true</publish>
+                    </image>
+
+                    <docker>
+\
+
+                        <publishRegistry>
+<!--                        dockerHub credentials-->
+                            <username>pulkabulky</username>
+                            <!--need to be provided for build-->
+                            <!--        mvn spring-boot:build-image -DskipTests -DdockerPassword=dckr_pat_staGys7XQj05MbY6se-z-62iEg0
+                            -->
+                            <!--mvn spring-boot:build-image -DskipTests -DockerPassword= dockerHub token-->
+                            <!--        <dockerPassword>${dockerPassword}</dockerPassword>-->
+                            <password>dckr_pat_2Njzz2IRjOpsU8Uu5XYJeOsuDHQ</password>
+                        </publishRegistry>
+                    </docker>
                 </configuration>
             </plugin>
         </plugins>

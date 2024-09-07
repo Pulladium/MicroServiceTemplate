@@ -36,3 +36,4 @@ services:
       KAFKA_CLUSTERS_NAME: local
       KAFKA_CLUSTERS_BOOTSTRAPSERVERS: broker:29092
       DYNAMIC_CONFIG_ENABLED: 'true'
+

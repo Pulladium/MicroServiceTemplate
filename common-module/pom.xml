@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.vozh.art</groupId>
-    <artifactId>CommonDto</artifactId>
+    <artifactId>common-module</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>CommonDto</name>
     <description>CommonDto</description>
@@ -28,14 +28,20 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>annotationProcessor</scope>
+<!--            </scope>annotationProcessor</scope>-->
+            <scope>provided</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+<!--                pring Boot Maven Plugin не может найти главный класс для этого модуля-->
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>
