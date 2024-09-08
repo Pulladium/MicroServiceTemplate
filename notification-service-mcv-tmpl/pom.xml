@@ -12,7 +12,7 @@
     <groupId>com.vozh.art</groupId>
     <artifactId>notification-service-mcv-tmpl</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>NotificationService</name>
+    <name>notification-service-mcv-tmpl</name>
     <description>NotificationService</description>
     <url/>
     <licenses>
@@ -58,13 +58,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>annotationProcessor</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vozh.art</groupId>
-            <artifactId>common-module</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
