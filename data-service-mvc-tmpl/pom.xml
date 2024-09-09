@@ -59,6 +59,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>com.vozh.art</groupId>-->
 <!--            <artifactId>common-module</artifactId>-->
