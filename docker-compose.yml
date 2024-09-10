@@ -1,3 +1,4 @@
+#kompose convert -f docker-compose.yml can be used.
 version: '4'
 services:
   zookeeper:
