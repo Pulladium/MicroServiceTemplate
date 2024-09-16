@@ -20,8 +20,8 @@
         <module>data-service-mvc-tmpl</module>
         <module>common-module</module>
         <module>eureka-server</module>
-        <module>processing-service-mcv-tmpl</module>
-        <module>notification-service-mcv-tmpl</module>
+        <module>processing-service-mvc-tmpl</module>
+        <module>notification-service-mvc-tmpl</module>
     </modules>
 
     <properties>
@@ -38,6 +38,12 @@
             <artifactId>common-module</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.dekorate</groupId>
+            <artifactId>kubernetes-spring-starter</artifactId>
+            <version>4.1.4</version>
         </dependency>
     </dependencies>
 

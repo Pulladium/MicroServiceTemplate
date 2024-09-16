@@ -9,8 +9,8 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>com.vozh.art</groupId>
-    <artifactId>notification-service-mcv-tmpl</artifactId>
+
+    <artifactId>notification-service-mvc-tmpl</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>notification-service-mcv-tmpl</name>
     <description>NotificationService</description>
