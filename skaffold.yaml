@@ -21,6 +21,15 @@ build:
         env:
           - BP_MAVEN_PROJECT_MODULES=processing-service-mvc-tmpl
           - BP_MAVEN_BUILT_ARTIFACT=processing-service-mvc-tmpl/target/processing-service-mvc-tmpl-1.0-SNAPSHOT.jar
+
+    - image: gateway-react
+      context: .
+      buildpacks:
+        builder: paketobuildpacks/builder:base
+        env:
+          - BP_MAVEN_PROJECT_MODULES=gateway-react
+          - BP_MAVEN_BUILT_ARTIFACT=gateway-react/target/gateway-react-1.0-SNAPSHOT.jar
+
 #build:
 #  artifacts:
 #    - image: admin/data-service-mvc-tmpl
@@ -60,7 +69,7 @@ manifests:
   rawYaml:
 #    - data-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml
 #    - eureka-server/target/classes/META-INF/dekorate/kubernetes.yml
-#    - gateway-react/target/classes/META-INF/dekorate/kubernetes.yml
+    - gateway-react/target/classes/META-INF/dekorate/kubernetes.yml
 #    - k8s/manifests/infrastructure/keycloak.yaml
 #    - notification-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml
     - processing-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml

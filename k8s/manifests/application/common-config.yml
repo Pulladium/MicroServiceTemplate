@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: common-config
+data:
+  PROCESSING_SERVICE_URL: "http://processing-service-mvc-tmpl.default.svc.cluster.local"
+  DATA_SERVICE_URL: "http://data-service-mvc-tmpl.default.svc.cluster.local"
+  NOTIFICATION_SERVICE_URL: "http://notification-service-mvc-tmpl.default.svc.cluster.local"
+  GATEWAY_URL: "http://gateway-react.default.svc.cluster.local"

@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   annotations:
     app.dekorate.io/vcs-url: <<unknown>>
-    app.dekorate.io/commit-id: cd839c824aa6128149dc99fadead8210e082949e
+    app.dekorate.io/commit-id: d069ace9ef1c649857a2d99c78cb97f8311053fb
   labels:
     app.kubernetes.io/name: data-service-mvc-tmpl
     app.kubernetes.io/version: 1.0-SNAPSHOT
@@ -19,7 +19,7 @@ spec:
     metadata:
       annotations:
         app.dekorate.io/vcs-url: <<unknown>>
-        app.dekorate.io/commit-id: cd839c824aa6128149dc99fadead8210e082949e
+        app.dekorate.io/commit-id: d069ace9ef1c649857a2d99c78cb97f8311053fb
       labels:
         app.kubernetes.io/name: data-service-mvc-tmpl
         app.kubernetes.io/version: 1.0-SNAPSHOT
@@ -43,7 +43,7 @@ kind: Service
 metadata:
   annotations:
     app.dekorate.io/vcs-url: <<unknown>>
-    app.dekorate.io/commit-id: cd839c824aa6128149dc99fadead8210e082949e
+    app.dekorate.io/commit-id: d069ace9ef1c649857a2d99c78cb97f8311053fb
   labels:
     app.kubernetes.io/name: data-service-mvc-tmpl
     app.kubernetes.io/version: 1.0-SNAPSHOT

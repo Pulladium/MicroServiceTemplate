@@ -22,11 +22,11 @@ public class SecurityConfig {
                 .route("processing-service", r ->
                         r.path("/api/processing/**")
                                 .uri("lb://processing-service"))
-                    .route("eureka-server", r -> r.path("/eureka/web/**")
-                            .filters(f -> f.setPath("/"))
-                            .uri("http://localhost:8761"))
-                    .route("eureka-server-static-resources", r -> r.path("/eureka/**")
-                            .uri("http://localhost:8761"))
+//                    .route("eureka-server", r -> r.path("/eureka/web/**")
+//                            .filters(f -> f.setPath("/"))
+//                            .uri("http://localhost:8761"))
+//                    .route("eureka-server-static-resources", r -> r.path("/eureka/**")
+//                            .uri("http://localhost:8761"))
                 .build();
     }
     //todo change to pathMathcers.permit and others authinticated
@@ -36,7 +36,7 @@ public class SecurityConfig {
         http
                 .authorizeExchange((authorize) -> authorize
                         .pathMatchers("/eureka/**").permitAll()
-                        .anyExchange().authenticated()
+                        .anyExchange().permitAll()
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
         return http.build();
