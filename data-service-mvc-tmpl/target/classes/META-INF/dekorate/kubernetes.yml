@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.dekorate.io/vcs-url: <<unknown>>
+    app.dekorate.io/commit-id: cd839c824aa6128149dc99fadead8210e082949e
+  labels:
+    app.kubernetes.io/name: data-service-mvc-tmpl
+    app.kubernetes.io/version: 1.0-SNAPSHOT
+  name: data-service-mvc-tmpl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: data-service-mvc-tmpl
+      app.kubernetes.io/version: 1.0-SNAPSHOT
+  template:
+    metadata:
+      annotations:
+        app.dekorate.io/vcs-url: <<unknown>>
+        app.dekorate.io/commit-id: cd839c824aa6128149dc99fadead8210e082949e
+      labels:
+        app.kubernetes.io/name: data-service-mvc-tmpl
+        app.kubernetes.io/version: 1.0-SNAPSHOT
+    spec:
+      containers:
+        - env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          image: Admin/data-service-mvc-tmpl:1.0-SNAPSHOT
+          imagePullPolicy: IfNotPresent
+          name: data-service-mvc-tmpl
+          ports:
+            - containerPort: 8082
+              name: http
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.dekorate.io/vcs-url: <<unknown>>
+    app.dekorate.io/commit-id: cd839c824aa6128149dc99fadead8210e082949e
+  labels:
+    app.kubernetes.io/name: data-service-mvc-tmpl
+    app.kubernetes.io/version: 1.0-SNAPSHOT
+  name: data-service-mvc-tmpl
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8082
+  selector:
+    app.kubernetes.io/name: data-service-mvc-tmpl
+    app.kubernetes.io/version: 1.0-SNAPSHOT
+  type: ClusterIP

@@ -1,0 +1,66 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: microservice-template
+requires:
+#  - path: ./common-module/skaffold.yaml
+#  - path: ./notification-service-mvc-tmpl/skaffold.yaml
+#  - path: ./data-service-mvc-tmpl/skaffold.yaml
+#  - path: ./processing-service-mvc-tmpl/skaffold.yaml
+#  - path: ./eureka-server/skaffold.yaml
+#  - path: ./gateway-react/skaffold.yaml
+
+test: []
+
+build:
+  artifacts:
+    - image: processing-service-mvc-tmpl
+      context: .
+      buildpacks:
+        builder: paketobuildpacks/builder:base
+        env:
+          - BP_MAVEN_PROJECT_MODULES=processing-service-mvc-tmpl
+          - BP_MAVEN_BUILT_ARTIFACT=processing-service-mvc-tmpl/target/processing-service-mvc-tmpl-1.0-SNAPSHOT.jar
+#build:
+#  artifacts:
+#    - image: admin/data-service-mvc-tmpl
+#      context: ./data-service-mvc-tmpl, .pom.xml
+#      buildpacks:
+#        builder: paketobuildpacks/builder:base
+#    - image: admin/eureka-server
+#      context: ./eureka-server, .pom.xml
+#      buildpacks:
+#        builder: paketobuildpacks/builder:base
+#
+#    - image: admin/gateway-react
+#      context: ./gateway-react, .pom.xml
+#      buildpacks:
+#        builder: paketobuildpacks/builder:base
+#    - image: admin/notification-service-mvc-tmpl
+#      context: ./notification-service-mvc-tmpl
+#      buildpacks:
+#        builder: paketobuildpacks/builder:base
+
+#    - image: admin/processing-service-mvc-tmpl
+#      context: ./processing-service-mvc-tmpl
+#      buildpacks:
+#        builder: paketobuildpacks/builder:base
+
+
+#profiles:
+#  # Local cluster - we build and deploy things locally
+#  - name: local
+#    build:
+#      local:
+#        push: false
+#    activation:
+#      - kubeContext: kind
+
+manifests:
+  rawYaml:
+#    - data-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml
+#    - eureka-server/target/classes/META-INF/dekorate/kubernetes.yml
+#    - gateway-react/target/classes/META-INF/dekorate/kubernetes.yml
+#    - k8s/manifests/infrastructure/keycloak.yaml
+#    - notification-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml
+    - processing-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml

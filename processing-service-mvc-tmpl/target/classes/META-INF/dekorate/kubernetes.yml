@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.dekorate.io/vcs-url: <<unknown>>
+    app.dekorate.io/commit-id: cd839c824aa6128149dc99fadead8210e082949e
+  labels:
+    app.kubernetes.io/name: processing-service-mvc-tmpl
+    app.kubernetes.io/version: 1.0-SNAPSHOT
+  name: processing-service-mvc-tmpl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/version: 1.0-SNAPSHOT
+      app.kubernetes.io/name: processing-service-mvc-tmpl
+  template:
+    metadata:
+      annotations:
+        app.dekorate.io/vcs-url: <<unknown>>
+        app.dekorate.io/commit-id: cd839c824aa6128149dc99fadead8210e082949e
+      labels:
+        app.kubernetes.io/version: 1.0-SNAPSHOT
+        app.kubernetes.io/name: processing-service-mvc-tmpl
+    spec:
+      containers:
+        - env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          image: processing-service-mvc-tmpl
+          imagePullPolicy: IfNotPresent
+          name: processing-service-mvc-tmpl
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.dekorate.io/vcs-url: <<unknown>>
+    app.dekorate.io/commit-id: cd839c824aa6128149dc99fadead8210e082949e
+  labels:
+    app.kubernetes.io/name: processing-service-mvc-tmpl
+    app.kubernetes.io/version: 1.0-SNAPSHOT
+  name: processing-service-mvc-tmpl
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8081
+  selector:
+    app.kubernetes.io/name: processing-service-mvc-tmpl
+    app.kubernetes.io/version: 1.0-SNAPSHOT
+  type: ClusterIP
