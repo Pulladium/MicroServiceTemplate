@@ -65,11 +65,11 @@ build:
 #    activation:
 #      - kubeContext: kind
 
+#kubectl port-forward pod/gateway-react-bc5b494b6-g4vr8 8080:80
+#curl http://localhost:8080/api/processing/test
 manifests:
   rawYaml:
-#    - data-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml
-#    - eureka-server/target/classes/META-INF/dekorate/kubernetes.yml
     - gateway-react/target/classes/META-INF/dekorate/kubernetes.yml
 #    - k8s/manifests/infrastructure/keycloak.yaml
-#    - notification-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml
     - processing-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml
+    - gateway-react/gateway-react-service.yaml

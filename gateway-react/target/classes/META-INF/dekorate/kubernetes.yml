@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   annotations:
     app.dekorate.io/vcs-url: <<unknown>>
-    app.dekorate.io/commit-id: d069ace9ef1c649857a2d99c78cb97f8311053fb
+    app.dekorate.io/commit-id: 0cbfcd87b5a6d5f1fabbef89693e827eb2b4a452
   labels:
     app.kubernetes.io/name: gateway-react
     app.kubernetes.io/version: 1.0-SNAPSHOT
@@ -13,16 +13,16 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/version: 1.0-SNAPSHOT
       app.kubernetes.io/name: gateway-react
+      app.kubernetes.io/version: 1.0-SNAPSHOT
   template:
     metadata:
       annotations:
         app.dekorate.io/vcs-url: <<unknown>>
-        app.dekorate.io/commit-id: d069ace9ef1c649857a2d99c78cb97f8311053fb
+        app.dekorate.io/commit-id: 0cbfcd87b5a6d5f1fabbef89693e827eb2b4a452
       labels:
-        app.kubernetes.io/version: 1.0-SNAPSHOT
         app.kubernetes.io/name: gateway-react
+        app.kubernetes.io/version: 1.0-SNAPSHOT
     spec:
       containers:
         - env:
@@ -30,7 +30,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-          image: gateway-react:1.0-SNAPSHOT
+          image: gateway-react
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
@@ -38,9 +38,11 @@ spec:
               port: 8080
               scheme: HTTP
             successThreshold: 1
+            initialDelaySeconds: 30
           name: gateway-react
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
               port: 8080
               scheme: HTTP
+            initialDelaySeconds: 30

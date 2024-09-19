@@ -32,12 +32,6 @@
 
     </properties>
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.vozh.art</groupId>-->
-<!--            <artifactId>common-module</artifactId>-->
-<!--            <version>0.0.1-SNAPSHOT</version>-->
-<!--&lt;!&ndash;            <scope>compile</scope>&ndash;&gt;-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>io.dekorate</groupId>
@@ -82,7 +76,7 @@
                     <image>
                         <name>pulkabulky/micros-template:${project.artifactId}${project.version}</name>
                         <builder>paketobuildpacks/builder-jammy-base:latest</builder>
-                        <publish>true</publish>
+                        <publish>false</publish>
                     </image>
 
                     <docker>

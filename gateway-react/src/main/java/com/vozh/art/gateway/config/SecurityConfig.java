@@ -1,5 +1,6 @@
 package com.vozh.art.gateway.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
@@ -15,13 +16,15 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
+    @Value("${processing.service.url}")
+    private String processingServiceUrl;
 
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("processing-service", r ->
                         r.path("/api/processing/**")
-                                .uri("lb://processing-service"))
+                                .uri(processingServiceUrl))
 //                    .route("eureka-server", r -> r.path("/eureka/web/**")
 //                            .filters(f -> f.setPath("/"))
 //                            .uri("http://localhost:8761"))
@@ -35,11 +38,13 @@ public class SecurityConfig {
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http){
         http
                 .authorizeExchange((authorize) -> authorize
-                        .pathMatchers("/eureka/**").permitAll()
+//                        .pathMatchers("/eureka/**").permitAll()
                         .anyExchange().permitAll()
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
         return http.build();
     }
 
+    //todo route fallback route
+    //todo circuit breaker filter
 }

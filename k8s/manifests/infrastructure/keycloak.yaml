@@ -183,7 +183,7 @@ spec:
     - protocol: TCP
       port: 8484
       targetPort: 8080
-  type: LoadBalancer  # Или NodePort, в зависимости от вашей конфигурации
+  type: ClusterIP  # Или NodePort, в зависимости от вашей конфигурации
 ---
 
 
