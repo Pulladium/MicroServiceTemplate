@@ -4,25 +4,28 @@ kind: Deployment
 metadata:
   annotations:
     app.dekorate.io/vcs-url: <<unknown>>
-    app.dekorate.io/commit-id: d069ace9ef1c649857a2d99c78cb97f8311053fb
+    app.dekorate.io/commit-id: 9dfd7cf2f7f6f34a83815dfc223fbec611873aa8
   labels:
     app.kubernetes.io/name: data-service-mvc-tmpl
+    app.kubernetes.io/part-of: spring-microservices
     app.kubernetes.io/version: 1.0-SNAPSHOT
   name: data-service-mvc-tmpl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: data-service-mvc-tmpl
       app.kubernetes.io/version: 1.0-SNAPSHOT
+      app.kubernetes.io/part-of: spring-microservices
+      app.kubernetes.io/name: data-service-mvc-tmpl
   template:
     metadata:
       annotations:
         app.dekorate.io/vcs-url: <<unknown>>
-        app.dekorate.io/commit-id: d069ace9ef1c649857a2d99c78cb97f8311053fb
+        app.dekorate.io/commit-id: 9dfd7cf2f7f6f34a83815dfc223fbec611873aa8
       labels:
-        app.kubernetes.io/name: data-service-mvc-tmpl
         app.kubernetes.io/version: 1.0-SNAPSHOT
+        app.kubernetes.io/part-of: spring-microservices
+        app.kubernetes.io/name: data-service-mvc-tmpl
     spec:
       containers:
         - env:
@@ -30,7 +33,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-          image: Admin/data-service-mvc-tmpl:1.0-SNAPSHOT
+          image: spring-microservices/data-service-mvc-tmpl:1.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: data-service-mvc-tmpl
           ports:
@@ -43,9 +46,10 @@ kind: Service
 metadata:
   annotations:
     app.dekorate.io/vcs-url: <<unknown>>
-    app.dekorate.io/commit-id: d069ace9ef1c649857a2d99c78cb97f8311053fb
+    app.dekorate.io/commit-id: 9dfd7cf2f7f6f34a83815dfc223fbec611873aa8
   labels:
     app.kubernetes.io/name: data-service-mvc-tmpl
+    app.kubernetes.io/part-of: spring-microservices
     app.kubernetes.io/version: 1.0-SNAPSHOT
   name: data-service-mvc-tmpl
 spec:
@@ -56,5 +60,6 @@ spec:
       targetPort: 8082
   selector:
     app.kubernetes.io/name: data-service-mvc-tmpl
+    app.kubernetes.io/part-of: spring-microservices
     app.kubernetes.io/version: 1.0-SNAPSHOT
   type: ClusterIP

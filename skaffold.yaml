@@ -14,13 +14,13 @@ test: []
 
 build:
   artifacts:
-    - image: processing-service-mvc-tmpl
-      context: .
-      buildpacks:
-        builder: paketobuildpacks/builder:base
-        env:
-          - BP_MAVEN_PROJECT_MODULES=processing-service-mvc-tmpl
-          - BP_MAVEN_BUILT_ARTIFACT=processing-service-mvc-tmpl/target/processing-service-mvc-tmpl-1.0-SNAPSHOT.jar
+#    - image: processing-service-mvc-tmpl
+#      context: .
+#      buildpacks:
+#        builder: paketobuildpacks/builder:base
+#        env:
+#          - BP_MAVEN_PROJECT_MODULES=processing-service-mvc-tmpl
+#          - BP_MAVEN_BUILT_ARTIFACT=processing-service-mvc-tmpl/target/processing-service-mvc-tmpl-1.0-SNAPSHOT.jar
 
     - image: gateway-react
       context: .
@@ -29,6 +29,7 @@ build:
         env:
           - BP_MAVEN_PROJECT_MODULES=gateway-react
           - BP_MAVEN_BUILT_ARTIFACT=gateway-react/target/gateway-react-1.0-SNAPSHOT.jar
+
 
 #build:
 #  artifacts:
@@ -71,5 +72,5 @@ manifests:
   rawYaml:
     - gateway-react/target/classes/META-INF/dekorate/kubernetes.yml
 #    - k8s/manifests/infrastructure/keycloak.yaml
-    - processing-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml
+#    - processing-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml
     - gateway-react/gateway-react-service.yaml

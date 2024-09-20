@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   annotations:
     app.dekorate.io/vcs-url: <<unknown>>
-    app.dekorate.io/commit-id: 0cbfcd87b5a6d5f1fabbef89693e827eb2b4a452
+    app.dekorate.io/commit-id: 9dfd7cf2f7f6f34a83815dfc223fbec611873aa8
   labels:
     app.kubernetes.io/name: gateway-react
     app.kubernetes.io/version: 1.0-SNAPSHOT
@@ -13,16 +13,16 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: gateway-react
       app.kubernetes.io/version: 1.0-SNAPSHOT
+      app.kubernetes.io/name: gateway-react
   template:
     metadata:
       annotations:
         app.dekorate.io/vcs-url: <<unknown>>
-        app.dekorate.io/commit-id: 0cbfcd87b5a6d5f1fabbef89693e827eb2b4a452
+        app.dekorate.io/commit-id: 9dfd7cf2f7f6f34a83815dfc223fbec611873aa8
       labels:
-        app.kubernetes.io/name: gateway-react
         app.kubernetes.io/version: 1.0-SNAPSHOT
+        app.kubernetes.io/name: gateway-react
     spec:
       containers:
         - env:
@@ -30,19 +30,39 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
-          image: gateway-react
+            - name: SPRING_CONFIG_IMPORT
+              value: configtree:/etc/config/
+          image: gateway-react:1.0-SNAPSHOT
           imagePullPolicy: IfNotPresent
           livenessProbe:
+            failureThreshold: 3
             httpGet:
               path: /actuator/health/liveness
               port: 8080
               scheme: HTTP
+            initialDelaySeconds: 0
+            periodSeconds: 30
             successThreshold: 1
-            initialDelaySeconds: 30
+            timeoutSeconds: 10
           name: gateway-react
           readinessProbe:
+            failureThreshold: 3
             httpGet:
               path: /actuator/health/readiness
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 30
+            initialDelaySeconds: 0
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+          volumeMounts:
+            - mountPath: /etc/config/
+              name: gateway-config-volume
+              readOnly: false
+              subPath: ""
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: gateway-config
+            optional: true
+          name: gateway-config-volume

@@ -17,10 +17,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>gateway-react</module>
-        <module>data-service-mvc-tmpl</module>
+<!--        <module>data-service-mvc-tmpl</module>-->
         <module>common-module</module>
-        <module>processing-service-mvc-tmpl</module>
-        <module>notification-service-mvc-tmpl</module>
+<!--        <module>processing-service-mvc-tmpl</module>-->
+<!--        <module>notification-service-mvc-tmpl</module>-->
     </modules>
 
     <properties>
@@ -33,11 +33,7 @@
     </properties>
     <dependencies>
 
-        <dependency>
-            <groupId>io.dekorate</groupId>
-            <artifactId>kubernetes-spring-starter</artifactId>
-            <version>4.1.4</version>
-        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -73,26 +69,26 @@
                         </exclude>
                     </excludes>
 
-                    <image>
-                        <name>pulkabulky/micros-template:${project.artifactId}${project.version}</name>
-                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>
-                        <publish>false</publish>
-                    </image>
+<!--                    <image>-->
+<!--                        <name>pulkabulky/micros-template:${project.artifactId}${project.version}</name>-->
+<!--                        <builder>paketobuildpacks/builder-jammy-base:latest</builder>-->
+<!--                        <publish>false</publish>-->
+<!--                    </image>-->
 
-                    <docker>
-\
+<!--                    <docker>-->
+<!--\-->
 
-                        <publishRegistry>
-<!--                        dockerHub credentials-->
-                            <username>pulkabulky</username>
-                            <!--need to be provided for build-->
-                            <!--        mvn spring-boot:build-image -DskipTests -DdockerPassword=dckr_pat_staGys7XQj05MbY6se-z-62iEg0
-                            -->
-                            <!--mvn spring-boot:build-image -DskipTests -DockerPassword= dockerHub token-->
-                            <!--        <dockerPassword>${dockerPassword}</dockerPassword>-->
-                            <password>dckr_pat_2Njzz2IRjOpsU8Uu5XYJeOsuDHQ</password>
-                        </publishRegistry>
-                    </docker>
+<!--                        <publishRegistry>-->
+<!--&lt;!&ndash;                        dockerHub credentials&ndash;&gt;-->
+<!--                            <username>pulkabulky</username>-->
+<!--                            &lt;!&ndash;need to be provided for build&ndash;&gt;-->
+<!--                            &lt;!&ndash;        mvn spring-boot:build-image -DskipTests -DdockerPassword=dckr_pat_staGys7XQj05MbY6se-z-62iEg0-->
+<!--                            &ndash;&gt;-->
+<!--                            &lt;!&ndash;mvn spring-boot:build-image -DskipTests -DockerPassword= dockerHub token&ndash;&gt;-->
+<!--                            &lt;!&ndash;        <dockerPassword>${dockerPassword}</dockerPassword>&ndash;&gt;-->
+<!--                            <password>dckr_pat_2Njzz2IRjOpsU8Uu5XYJeOsuDHQ</password>-->
+<!--                        </publishRegistry>-->
+<!--                    </docker>-->
                 </configuration>
             </plugin>
         </plugins>
