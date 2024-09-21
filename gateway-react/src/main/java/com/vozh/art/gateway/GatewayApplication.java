@@ -1,5 +1,6 @@
 package com.vozh.art.gateway;
 
+import com.vozh.art.gateway.config.PropertiesConfig;
 import io.dekorate.docker.annotation.DockerBuild;
 import io.dekorate.kubernetes.annotation.ConfigMapVolume;
 import io.dekorate.kubernetes.annotation.Env;
@@ -33,12 +34,12 @@ import org.springframework.context.annotation.Bean;
 
 //@EnableDiscoveryClient
 public class GatewayApplication {
-    @Value("${config.default.property1}")
-    private static String configDefault;
+
+
     public static void main(String[] args) {
-        log.info("Gateway starting with property from config/default {}, {}", System.getProperty("config.default") , configDefault);
+        log.info("Gateway starting with property from config/default {}, {}", System.getProperty("config.default.property1") );
         SpringApplication.run(GatewayApplication.class);
-        log.info("Gateway started with property from config/default {}, {}", System.getProperty("config.default") , configDefault);
+        log.info("Gateway started with property from config/default {}, {}", System.getProperty("config.default.property1") );
     }
 
 

@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties("config.default")
+@ConfigurationProperties("gateway-config")
 @Getter
 @Setter
 public class PropertiesConfig {

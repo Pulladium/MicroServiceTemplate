@@ -1,5 +1,6 @@
 package com.vozh.art.gateway.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -13,14 +14,22 @@ import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 
+@Slf4j
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
     @Value("${processing.service.url}")
     private String processingServiceUrl;
 
+    private final PropertiesConfig configDefault;
+
+    public SecurityConfig(PropertiesConfig configDefault) {
+        this.configDefault = configDefault;
+    }
+
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+        log.info("building routes configuration is : {}", configDefault.getProperty1());
         return builder.routes()
                 .route("processing-service", r ->
                         r.path("/api/processing/**")
