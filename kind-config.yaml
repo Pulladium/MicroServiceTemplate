@@ -5,5 +5,7 @@ nodes:
   - role: worker
   - role: worker
 
-
+#
 #kind create cluster --name multi-node-cluster --config kind-config.yaml
+
+#kind delete cluster --name=kind

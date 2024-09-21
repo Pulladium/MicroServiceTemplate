@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   annotations:
     app.dekorate.io/vcs-url: <<unknown>>
-    app.dekorate.io/commit-id: 22de5b34e25f6955824dab62eedf82166a2844b2
+    app.dekorate.io/commit-id: 0a0f11a4375c2f06dfca99e8c87a6da119d2e67b
   labels:
     app.kubernetes.io/name: gateway-react
     app.kubernetes.io/version: 1.0-SNAPSHOT
@@ -19,7 +19,7 @@ spec:
     metadata:
       annotations:
         app.dekorate.io/vcs-url: <<unknown>>
-        app.dekorate.io/commit-id: 22de5b34e25f6955824dab62eedf82166a2844b2
+        app.dekorate.io/commit-id: 0a0f11a4375c2f06dfca99e8c87a6da119d2e67b
       labels:
         app.kubernetes.io/version: 1.0-SNAPSHOT
         app.kubernetes.io/name: gateway-react

@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @DockerBuild(name = "gateway-react", version = "1.0-SNAPSHOT")
 @KubernetesApplication(
+
         configMapVolumes = @ConfigMapVolume(
                 configMapName = "gateway-config",
                 volumeName = "gateway-config-volume",
@@ -28,7 +29,8 @@ import org.springframework.context.annotation.Bean;
                 path = "/etc/config/"),
         envVars = @Env(
                 name = "SPRING_CONFIG_IMPORT",
-                value = "configtree:/etc/config/"))
+                value = "configtree:/etc/config/")
+)
 @Slf4j
 
 
