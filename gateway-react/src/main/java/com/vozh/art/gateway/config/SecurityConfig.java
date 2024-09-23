@@ -27,6 +27,8 @@ public class SecurityConfig {
         this.configDefault = configDefault;
     }
 
+
+
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         log.info("building routes configuration is : {}", configDefault.getProperty1());

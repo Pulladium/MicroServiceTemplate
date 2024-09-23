@@ -24,4 +24,8 @@ build:
 manifests:
   rawYaml:
     - gateway-react/target/classes/META-INF/dekorate/kubernetes.yml
-    - gateway-react/gateway-react-service.yaml
+
+
+#skaffold doesn't init this
+deploy:
+  kubeContext: kind-multi-node-cluster

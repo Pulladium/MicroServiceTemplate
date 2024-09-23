@@ -2,10 +2,7 @@ package com.vozh.art.gateway;
 
 import com.vozh.art.gateway.config.PropertiesConfig;
 import io.dekorate.docker.annotation.DockerBuild;
-import io.dekorate.kubernetes.annotation.ConfigMapVolume;
-import io.dekorate.kubernetes.annotation.Env;
-import io.dekorate.kubernetes.annotation.KubernetesApplication;
-import io.dekorate.kubernetes.annotation.Mount;
+import io.dekorate.kubernetes.annotation.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -17,8 +14,10 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 @DockerBuild(name = "gateway-react", version = "1.0-SNAPSHOT")
+
 @KubernetesApplication(
 
+        ingress = @Ingress(expose = true),
         configMapVolumes = @ConfigMapVolume(
                 configMapName = "gateway-config",
                 volumeName = "gateway-config-volume",
@@ -29,7 +28,9 @@ import org.springframework.context.annotation.Bean;
                 path = "/etc/config/"),
         envVars = @Env(
                 name = "SPRING_CONFIG_IMPORT",
-                value = "configtree:/etc/config/")
+                value = "configtree:/etc/config/"),
+        serviceType = ServiceType.ClusterIP,
+        ports = @Port(name = "http", containerPort = 8080)
 )
 @Slf4j
 

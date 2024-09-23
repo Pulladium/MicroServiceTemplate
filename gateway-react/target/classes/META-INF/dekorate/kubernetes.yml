@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   annotations:
     app.dekorate.io/vcs-url: <<unknown>>
-    app.dekorate.io/commit-id: 0a0f11a4375c2f06dfca99e8c87a6da119d2e67b
+    app.dekorate.io/commit-id: 9ad442de32443c7e120acba74bbba0822982d938
   labels:
     app.kubernetes.io/name: gateway-react
     app.kubernetes.io/version: 1.0-SNAPSHOT
@@ -19,7 +19,7 @@ spec:
     metadata:
       annotations:
         app.dekorate.io/vcs-url: <<unknown>>
-        app.dekorate.io/commit-id: 0a0f11a4375c2f06dfca99e8c87a6da119d2e67b
+        app.dekorate.io/commit-id: 9ad442de32443c7e120acba74bbba0822982d938
       labels:
         app.kubernetes.io/version: 1.0-SNAPSHOT
         app.kubernetes.io/name: gateway-react
@@ -45,6 +45,10 @@ spec:
             successThreshold: 1
             timeoutSeconds: 10
           name: gateway-react
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
           readinessProbe:
             failureThreshold: 3
             httpGet:
@@ -66,3 +70,83 @@ spec:
             name: gateway-config
             optional: true
           name: gateway-config-volume
+---
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: nginx
+  # annotations:
+  #   ingressclass.kubernetes.io/is-default-class: "true"
+spec:
+  controller: k8s.io/ingress-nginx
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+#    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    app.dekorate.io/vcs-url: <<unknown>>
+    app.dekorate.io/commit-id: 9ad442de32443c7e120acba74bbba0822982d938
+  labels:
+#    app.kubernetes.io/part-of: default
+    app.kubernetes.io/name: gateway-react
+    app.kubernetes.io/version: 1.0-SNAPSHOT
+  name: gateway-react
+
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+#            path: /api(/|$)(.*)
+            path: /
+            backend:
+              service:
+                name: gateway-react
+                port:
+                  number: 8080
+#          - pathType: Prefix
+#            path: /bar(/|$)(.*)
+#            backend:
+#              service:
+#                name: bar-service
+#                port:
+#                  number: 8080
+#spec:
+#  rules:
+#    - host: ""
+#      http:
+#        paths:
+#          - backend:
+#              service:
+#                name: gateway-react
+#                port:
+#                  number: 8080
+#            path: /api(/|$)(.*)
+#            pathType: Prefix
+#     kubectl get all -n ingress-nginx
+#   kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+#  kubectl wait --namespace ingress-nginx   --for=condition=ready pod   --selector=app.kubernetes.io/component=controller   --timeout=90s
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.dekorate.io/vcs-url: <<unknown>>
+    app.dekorate.io/commit-id: 9ad442de32443c7e120acba74bbba0822982d938
+  labels:
+    app.kubernetes.io/name: gateway-react
+    app.kubernetes.io/version: 1.0-SNAPSHOT
+  name: gateway-react
+spec:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+#      targetPort: 8080
+  selector:
+    app.kubernetes.io/name: gateway-react
+    app.kubernetes.io/version: 1.0-SNAPSHOT
+#  type: NodePort
