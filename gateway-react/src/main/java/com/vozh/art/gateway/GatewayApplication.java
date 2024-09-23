@@ -4,15 +4,18 @@ import com.vozh.art.gateway.config.PropertiesConfig;
 import io.dekorate.docker.annotation.DockerBuild;
 import io.dekorate.kubernetes.annotation.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 @DockerBuild(name = "gateway-react", version = "1.0-SNAPSHOT")
 
 @KubernetesApplication(
@@ -29,7 +32,7 @@ import org.springframework.context.annotation.Bean;
         envVars = @Env(
                 name = "SPRING_CONFIG_IMPORT",
                 value = "configtree:/etc/config/"),
-        serviceType = ServiceType.ClusterIP,
+//        serviceType = ServiceType.ClusterIP,
         ports = @Port(name = "http", containerPort = 8080)
 )
 @Slf4j

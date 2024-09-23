@@ -2,7 +2,7 @@ apiVersion: skaffold/v4beta11
 kind: Config
 metadata:
   name: microservice-template
-requires:
+#requires:
 
 test: []
 
@@ -17,14 +17,22 @@ build:
           - BP_MAVEN_PROJECT_MODULES=gateway-react
           - BP_MAVEN_BUILT_ARTIFACT=gateway-react/target/gateway-react-1.0-SNAPSHOT.jar
 
+    - image: processing-service-mvc-tmpl
+      context: .
+      buildpacks:
+        builder: paketobuildpacks/builder:base
+        env:
+          - BP_MAVEN_PROJECT_MODULES=processing-service-mvc-tmpl
+          - BP_MAVEN_BUILT_ARTIFACT=processing-service-mvc-tmpl/target/processing-service-mvc-tmpl-1.0-SNAPSHOT.jar
 
 
 #kubectl port-forward pod/gateway-react-bc5b494b6-g4vr8 8080:80
 #curl http://localhost:8080/api/processing/test
 manifests:
   rawYaml:
-    - gateway-react/target/classes/META-INF/dekorate/kubernetes.yml
-
+#    - gateway-react/target/classes/META-INF/dekorate/kubernetes.yml
+    - gateway-react/src/main/resources/configured-kubernetes.yml
+    - processing-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml
 
 #skaffold doesn't init this
 deploy:
