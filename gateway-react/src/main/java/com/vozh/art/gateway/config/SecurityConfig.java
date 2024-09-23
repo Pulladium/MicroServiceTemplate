@@ -50,7 +50,7 @@ public class SecurityConfig {
         http
                 .authorizeExchange((authorize) -> authorize
 //                        .pathMatchers("/eureka/**").permitAll()
-                        .anyExchange().permitAll()
+                        .anyExchange().authenticated()
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
         return http.build();

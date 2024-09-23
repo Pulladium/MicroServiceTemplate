@@ -181,11 +181,12 @@ spec:
     app: keycloak
   ports:
     - protocol: TCP
-      port: 8484
+      port: 8080
       targetPort: 8080
-  type: ClusterIP  # Или NodePort, в зависимости от вашей конфигурации
+  type: ClusterIP
 ---
 
 
+#todo use in different namespace
 
 
