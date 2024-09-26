@@ -1,0 +1,21 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: gateway-react
+build:
+  artifacts:
+    - image: gateway-react
+      buildpacks:
+        builder: paketobuildpacks/builder:base
+
+manifests:
+  rawYaml:
+    - gateway-react-config.yaml
+#    - gateway-react-service.yaml
+#    - target/classes/META-INF/dekorate/kubernetes.yml
+    - src/main/resources/configured-kubernetes.yml
+
+#skaffold doesn't init this
+deploy:
+  kubeContext: multi-node-cluster
+
