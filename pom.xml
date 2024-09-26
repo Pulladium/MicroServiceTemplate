@@ -17,10 +17,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>gateway-react</module>
-<!--        <module>data-service-mvc-tmpl</module>-->
+        <module>data-service-mvc-tmpl</module>
         <module>common-module</module>
         <module>processing-service-mvc-tmpl</module>
-<!--        <module>notification-service-mvc-tmpl</module>-->
+        <module>notification-service-mvc-tmpl</module>
     </modules>
 
     <properties>

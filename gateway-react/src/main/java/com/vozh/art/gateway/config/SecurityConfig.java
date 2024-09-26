@@ -21,6 +21,10 @@ public class SecurityConfig {
     @Value("${processing.service.url}")
     private String processingServiceUrl;
 
+
+    @Value("${keycloak.auth-server-url}")
+    private String keycloakAuthServerUrl;
+
     private final PropertiesConfig configDefault;
 
     public SecurityConfig(PropertiesConfig configDefault) {
@@ -36,6 +40,11 @@ public class SecurityConfig {
                 .route("processing-service", r ->
                         r.path("/api/processing/**")
                                 .uri(processingServiceUrl))
+
+                .route("keycloak", r -> r.path("/openid-connect/token")
+                        .filters(f -> f.rewritePath("/openid-connect/token",
+                                "/realms/MicrosTemplate/protocol/openid-connect/token"))
+                        .uri(keycloakAuthServerUrl))
 //                    .route("eureka-server", r -> r.path("/eureka/web/**")
 //                            .filters(f -> f.setPath("/"))
 //                            .uri("http://localhost:8761"))
@@ -50,6 +59,8 @@ public class SecurityConfig {
         http
                 .authorizeExchange((authorize) -> authorize
 //                        .pathMatchers("/eureka/**").permitAll()
+                        .pathMatchers("/actuator/health/**").permitAll()
+                        .pathMatchers("/openid-connect/token").permitAll()
                         .anyExchange().authenticated()
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));

@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   annotations:
     app.dekorate.io/vcs-url: <<unknown>>
-    app.dekorate.io/commit-id: d67d766802951827b7ca82ecd7b42c25b10300b9
+    app.dekorate.io/commit-id: 817887a1e8f4636b685f11a875911e4ffc08ce65
   labels:
     app.kubernetes.io/name: processing-service-mvc-tmpl
     app.kubernetes.io/version: 1.0-SNAPSHOT
@@ -15,15 +15,14 @@ spec:
     matchLabels:
       app.kubernetes.io/version: 1.0-SNAPSHOT
       app.kubernetes.io/name: processing-service-mvc-tmpl
-
   template:
     metadata:
       annotations:
         app.dekorate.io/vcs-url: <<unknown>>
-        app.dekorate.io/commit-id: d67d766802951827b7ca82ecd7b42c25b10300b9
+        app.dekorate.io/commit-id: 817887a1e8f4636b685f11a875911e4ffc08ce65
       labels:
-        app.kubernetes.io/name: processing-service-mvc-tmpl
         app.kubernetes.io/version: 1.0-SNAPSHOT
+        app.kubernetes.io/name: processing-service-mvc-tmpl
     spec:
       containers:
         - env:
@@ -44,7 +43,7 @@ kind: Service
 metadata:
   annotations:
     app.dekorate.io/vcs-url: <<unknown>>
-    app.dekorate.io/commit-id: d67d766802951827b7ca82ecd7b42c25b10300b9
+    app.dekorate.io/commit-id: 817887a1e8f4636b685f11a875911e4ffc08ce65
   labels:
     app.kubernetes.io/name: processing-service-mvc-tmpl
     app.kubernetes.io/version: 1.0-SNAPSHOT

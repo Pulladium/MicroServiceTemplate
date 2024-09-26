@@ -1,0 +1,3 @@
+kubectl apply -f broker-deployment.yaml
+
+kubectl get all -n kafka-ns

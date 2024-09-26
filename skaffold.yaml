@@ -26,11 +26,16 @@ build:
           - BP_MAVEN_BUILT_ARTIFACT=processing-service-mvc-tmpl/target/processing-service-mvc-tmpl-1.0-SNAPSHOT.jar
 
 
+
+
+
 #kubectl port-forward pod/gateway-react-bc5b494b6-g4vr8 8080:80
 #curl http://localhost:8080/api/processing/test
 manifests:
   rawYaml:
 #    - gateway-react/target/classes/META-INF/dekorate/kubernetes.yml
+#    - kubectl -f apply gateway-react/target/classes/META-INF/dekorate/kubernetes.yml
+#    - kubectl -f apply gateway-react/src/main/resources/configured-kubernetes.yml
     - gateway-react/src/main/resources/configured-kubernetes.yml
     - processing-service-mvc-tmpl/target/classes/META-INF/dekorate/kubernetes.yml
 

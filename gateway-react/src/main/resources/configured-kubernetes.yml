@@ -40,7 +40,7 @@ spec:
               path: /actuator/health/liveness
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 0
+            initialDelaySeconds: 10
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 10
@@ -55,7 +55,7 @@ spec:
               path: /actuator/health/readiness
               port: 8080
               scheme: HTTP
-            initialDelaySeconds: 0
+            initialDelaySeconds: 10
             periodSeconds: 30
             successThreshold: 1
             timeoutSeconds: 10
@@ -150,3 +150,6 @@ spec:
     app.kubernetes.io/name: gateway-react
     app.kubernetes.io/version: 1.0-SNAPSHOT
 #  type: NodePort
+
+
+#kubectl apply -f gateway-react/src/main/resources/configured-kubernetes.yml
