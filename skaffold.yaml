@@ -42,7 +42,7 @@ profiles:
         - ./gateway-react/gateway-react-config.yaml
         - ./gateway-react/src/main/resources/configured-kubernetes.yml
     deploy:
-      kubeContext: multi-node-cluster
+      kubeContext: kind-multi-node-cluster
 
 #    deploy:
 #        kubectl:

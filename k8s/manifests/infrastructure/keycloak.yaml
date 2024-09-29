@@ -120,7 +120,7 @@ spec:
           image: quay.io/keycloak/keycloak:23.0.6
           args: ["start"]
           ports:
-            - containerPort: 8080
+            - containerPort: 8484
           env:
             - name: KC_DB
               value: postgres
@@ -136,7 +136,7 @@ spec:
             - name: KC_HOSTNAME
               value: localhost
             - name: KC_HTTP_PORT
-              value: "8080"
+              value: "8484"
             - name: KC_HOSTNAME_PORT
               value: "8484"
             - name: KC_HTTP_ENABLED
@@ -181,12 +181,12 @@ spec:
     app: keycloak
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8484
+      targetPort: 8484
   type: ClusterIP
 ---
 
-
+#kubectl apply -f k8s/manifests/infrastructure/keycloak.yaml
 #todo use in different namespace
 
 

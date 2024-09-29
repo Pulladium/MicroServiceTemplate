@@ -8,11 +8,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.header.ServerHttpHeadersWriter;
 
 @Slf4j
 @Configuration
@@ -40,7 +45,8 @@ public class SecurityConfig {
                 .route("processing-service", r ->
                         r.path("/api/processing/**")
                                 .uri(processingServiceUrl))
-
+//                .route("keycloak", r -> r.path("/realms/MicrosTemplate/**")
+//                        .uri(keycloakAuthServerUrl))
                 .route("keycloak", r -> r.path("/openid-connect/token")
                         .filters(f -> f.rewritePath("/openid-connect/token",
                                 "/realms/MicrosTemplate/protocol/openid-connect/token"))
@@ -57,13 +63,16 @@ public class SecurityConfig {
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http){
         http
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange((authorize) -> authorize
 //                        .pathMatchers("/eureka/**").permitAll()
-                        .pathMatchers("/actuator/health/**").permitAll()
-                        .pathMatchers("/openid-connect/token").permitAll()
+                        .pathMatchers("/actuator/health/**",
+                                "/openid-connect/token", "/realms/**", "api/processing/test").permitAll()
+//                        .pathMatchers("/openid-connect/token").permitAll()
                         .anyExchange().authenticated()
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
+
         return http.build();
     }
 
