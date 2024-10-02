@@ -150,11 +150,16 @@ spec:
                 secretKeyRef:
                   name: keycloak-secrets
                   key: admin-username
+            - name: KC_PROXY
+              value: "edge"
+            - name: KC_PROXY_ADDRESS_FORWARDING
+              value: "true"
             - name: KEYCLOAK_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: keycloak-secrets
                   key: admin-password
+
 ---
 
 
@@ -181,7 +186,7 @@ spec:
     app: keycloak
   ports:
     - protocol: TCP
-      port: 8484
+      port: 443
       targetPort: 8484
   type: ClusterIP
 ---

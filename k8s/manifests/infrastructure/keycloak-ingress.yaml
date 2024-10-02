@@ -8,6 +8,7 @@ spec:
     - hosts:
         - localhost
       secretName: tls-secret
+  ingressClassName: nginx
   rules:
     - host: localhost
       http:

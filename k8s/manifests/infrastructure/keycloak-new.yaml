@@ -118,9 +118,8 @@ spec:
       containers:
         - name: keycloak
           image: quay.io/keycloak/keycloak:23.0.6
-          args: ["start"]
-          ports:
-            - containerPort: 8484
+          args: ["start-dev"]
+
           env:
             - name: KC_DB
               value: postgres
@@ -136,9 +135,9 @@ spec:
             - name: KC_HOSTNAME
               value: localhost
             - name: KC_HTTP_PORT
-              value: "8484"
+              value: "8080"
             - name: KC_HOSTNAME_PORT
-              value: "8484"
+              value: "8080"
             - name: KC_HTTP_ENABLED
               value: "true"
             - name: KC_HOSTNAME_STRICT_HTTPS
@@ -155,6 +154,28 @@ spec:
                 secretKeyRef:
                   name: keycloak-secrets
                   key: admin-password
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: 8080
+            initialDelaySeconds: 250
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: 8080
+            initialDelaySeconds: 500
+            periodSeconds: 30
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
 ---
 
 
@@ -174,7 +195,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: tls-secret
-  namespace: hbr-keycloak
+  namespace: default
 type: kubernetes.io/tls
 data:
   tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURMVENDQWhXZ0F3SUJBZ0lVUVRQREtLUGtRYjZBYWNXN2htTFdtSThOOVg4d0RRWUpLb1pJaHZjTkFRRUwKQlFBd0pqRVJNQThHQTFVRUF3d0libWRwYm5oemRtTXhFVEFQQmdOVkJBb01DRzVuYVc1NGMzWmpNQjRYRFRJegpNRFF3T1RBM01qSTFOVm9YRFRJME1EUXdPREEzTWpJMU5Wb3dKakVSTUE4R0ExVUVBd3dJYm1kcGJuaHpkbU14CkVUQVBCZ05WQkFvTUNHNW5hVzU0YzNaak1JSUJJakFOQmdrcWhraUc5dzBCQVFFRkFBT0NBUThBTUlJQkNnS0MKQVFFQWwrai9XcFVwQmtNdFBkemV4SGM0WlZHeENpdDlxUmRlV1FDay9JUXNVS1JkNGJSQTlFMXRGTzNheENnRQpKcGdYL1RHSHhid2VvMFVrU3BRU2czYzBoZ09KaWJKWGxlTmpsM0VTOXNmQWVCZEdVVFNMYzFtZ0x0Sm5sYklaClE2U3NnZ3RuZ3VGSFRZcFBoblBCZ1MzTkFjYk1WK01ZTlNEamVXQnJWTVI3RWM5YmJrT3d3VHNod1lXNEorTzUKdUdRTlhYUWNLWFdDdTRRZXpoUmNnOVhseEhWUTkxTURnNEJLbk5jUm9QdVRBaHdlWUJGSGZTenNJbTBQTzE5Qgp1c093cmJCTXNhV2UyZzRqbEIrZmtCMExLbS84RklRZnVXUS95eTVZYnpoK0kzT0xoUTdvYmNQUzlBNHl1R0Y1CnhVNExZbFRpNFN2UnBGSHN0QUxQT0JzVzd3SURBUUFCbzFNd1VUQWRCZ05WSFE0RUZnUVV5SkFxV21ISEtiTzEKWk0vMDhzc2NHRkFYQ1h3d0h3WURWUjBqQkJnd0ZvQVV5SkFxV21ISEtiTzFaTS8wOHNzY0dGQVhDWHd3RHdZRApWUjBUQVFIL0JBVXdBd0VCL3pBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQWE0Sk8xSGZ6Z0FPTTJUb3JmRFFEClhVNWM3bENjYmRDa1ZGeHBBQUlyeVo3WWljMm1mcllTNHMwMTU1dHVqUTNqLy9hVlYwTWFpOU96bGVTdmFockQKeU9veE9INzUrZWtUd1BkSHhvaHoxbFI5dW1yRUNBcXlIYnR2SXBCcFliTXFnZmp6KzJZNFBib290ZmhjMHVWZwptRFRsN1d3ak1XMURiQmlsM3ptSlRZZU5vSThUTXlCTWhwcGt0UndDVkM4VGRsRHNBUHZFWlZXUDBpL3VGOHBDCmZlZXFiaEtQSHZjZUV5V3Q4U0N0aDhmaDAycnViQlBjT3RycmtuUUlxakpxeVFPUFFXNjM1TGpxQTM0aWpBcEEKNDJxTlIzWGJvdTFOSkM3Wk8vdzJQYmtLZnlCNkNrdmRHQ3dOZWxjSnpRZXN1RWd6NDNrS240RUVIK09vUkFVTQprdz09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
