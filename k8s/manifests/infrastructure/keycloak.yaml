@@ -186,7 +186,7 @@ spec:
     app: keycloak
   ports:
     - protocol: TCP
-      port: 443
+      port: 8484
       targetPort: 8484
   type: ClusterIP
 ---
