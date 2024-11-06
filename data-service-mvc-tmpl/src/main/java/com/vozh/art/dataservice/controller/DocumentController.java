@@ -37,7 +37,7 @@ public class DocumentController {
 
         Map<String, String> response = Map.of(
                 "publicKey", document.getEd25519PublicKey(),
-                "signature", document.getEd25519Signature()
+                "signature", document.getEd25519Signature() + " doc uuid = " +  document.getId()
         );
 
         return ResponseEntity.ok(response);
@@ -92,8 +92,10 @@ public class DocumentController {
 //                .contentLength(content.length)
 //                .body(resource);
 //    }
+
+    //todo should also send verification data
     @GetMapping("/{id}")
-    public ResponseEntity<ByteArrayResource> getDocument(@PathVariable String id) throws IOException {
+    public ResponseEntity<ByteArrayResource> getDocumentFile (@PathVariable String id) throws IOException {
         DocWithFile documentWithContent = signedDocService.getDocWithFile(id);
         SignedDoc document = documentWithContent.doc();
         byte[] content = documentWithContent.file();

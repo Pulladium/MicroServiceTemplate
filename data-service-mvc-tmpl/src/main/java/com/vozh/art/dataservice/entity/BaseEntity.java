@@ -2,19 +2,21 @@ package com.vozh.art.dataservice.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
-@Entity
+//@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+//@Builder
+@SuperBuilder
+@Getter
+@Setter
 @MappedSuperclass
-public class BaseEntity<T> {
+public abstract class BaseEntity<T> {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private T id;
 
     @Column(nullable = false)

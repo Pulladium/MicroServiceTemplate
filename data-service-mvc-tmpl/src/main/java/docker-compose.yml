@@ -1,26 +1,42 @@
-version: '4'
-
 services:
-  postgres:
-    image: postgres:latest
+  mongodb:
+    image: mongo:latest
     ports:
-      - "5432:5432"
+      - "27017:27017"
     environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "1234"
-      POSTGRES_DB: "TemplateDB"
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: MongoDocumentDb
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - mongodb_data:/data/db
 
-  app:
-    build: .
-    container_name: spring-boot-app
-    ports:
-      - "8443:8443"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/yourdatabase
-      SPRING_DATASOURCE_USERNAME: youruser
-      SPRING_DATASOURCE_PASSWORD: yourpassword
-    depends_on:
-      - postgres
+volumes:
+  mongodb_data:
 
+
+#version: '4'
+#
+#services:
+#  postgres:
+#    image: postgres:latest
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_USER: "postgres"
+#      POSTGRES_PASSWORD: "1234"
+#      POSTGRES_DB: "TemplateDB"
+#    volumes:
+#      - ./data:/var/lib/postgresql/data
+#
+##  app:
+##    build: .
+##    container_name: spring-boot-app
+##    ports:
+##      - "8443:8443"
+##    environment:
+##      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/yourdatabase
+##      SPRING_DATASOURCE_USERNAME: youruser
+##      SPRING_DATASOURCE_PASSWORD: yourpassword
+##    depends_on:
+##      - postgres
+#
