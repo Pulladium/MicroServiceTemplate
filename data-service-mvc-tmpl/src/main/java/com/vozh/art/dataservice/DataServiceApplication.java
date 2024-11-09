@@ -2,6 +2,8 @@ package com.vozh.art.dataservice;
 
 import com.vozh.art.dataservice.entity.DataItem;
 import com.vozh.art.dataservice.repository.DataItemRepository;
+import com.vozh.art.dataservice.service.PdfService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +20,7 @@ import java.util.List;
 public class DataServiceApplication {
     public static void main(String[] args) {
 
+
         SpringApplication.run(DataServiceApplication.class);
     }
 
@@ -32,4 +35,7 @@ public class DataServiceApplication {
             dataItemRepository.saveAll(items);
         };
     }
+
+
+
 }
