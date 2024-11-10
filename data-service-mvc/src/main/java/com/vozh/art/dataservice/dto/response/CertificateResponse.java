@@ -11,7 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 public class CertificateResponse {
-    private String certificateId;
+    private Long certificateId;
     private String description;
 
     private Set<OrganizationResponse> issuers;
@@ -21,4 +21,5 @@ public class CertificateResponse {
     private Set<SingedDocRefResponse> singedDocRefs;
 
     private Set<ParticipantResponse> participants;
+
 }

@@ -1,5 +1,6 @@
 package com.vozh.art.dataservice.service;
 
+import com.vozh.art.dataservice.dto.response.CertificateResponse;
 import com.vozh.art.dataservice.entity.Certificate;
 import com.vozh.art.dataservice.repository.CertificateRepository;
 import jakarta.persistence.PersistenceException;
@@ -30,6 +31,14 @@ public class CertificateService {
         catch (Exception e){
             throw new PersistenceException("Failed to save into DB");
         }
+    }
+
+    public static CertificateResponse mapToResponse(Certificate certificate){
+        return CertificateResponse.builder()
+                .certificateId(certificate.getId())
+                .description(certificate.getDescription())
+                .categories(certificate.getCategories())
+                .build();
     }
 
 
