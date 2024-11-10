@@ -44,6 +44,9 @@ public class CertificateService {
                 .categories(certificate.getCategories().stream()
                         .map(category -> CategoryService.mapToResponse(category ,1))
                         .collect(Collectors.toSet()))
+                .participants(certificate.getCertificateParticipants().stream()
+                        .map(participant -> ParticipantService.mapToResponse(participant.getParticipant()))
+                        .collect(Collectors.toSet()))
                 .build();
     }
 

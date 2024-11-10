@@ -81,10 +81,11 @@ public class DataServiceApplication {
 
 
             participantRepository.save(participant);
-            certificateParticipantRepo.save(certificateParticipant);
+
             categoryRepository.saveAll(List.of(category,subCategory));
             organizationRepository.save(organization);
             Certificate savedCert = certificateRepository.save(certificate);
+            certificateParticipantRepo.save(certificateParticipant);
             log.info("Cert id after save : {}", savedCert.getId());
         };
     }
