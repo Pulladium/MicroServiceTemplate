@@ -13,20 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Slf4j
 public class DevController {
-//    private final PdfService pdfService;
-//
-//
-//
-//    @GetMapping("/createPdf")
-//    public String createPdf() {
-//        try {
-//            pdfService.createPDFWithLayer("pdfs/layeroutput.pdf", "John", "Doe");
-//            return "PDF created";
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return "Error";
-//        }
-//    }
+
 
     private final CategoryService categoryService;
 
@@ -36,14 +23,4 @@ public class DevController {
         return ResponseEntity.ok(categoryService.createCategory(category));
     }
 
-//    @GetMapping("/removeLayerPD")
-//    public String removeLayerPD() {
-//        try {
-//            pdfService.removePersonalDataLayer("pdfs/layeroutput.pdf", "pdfs/outwithoutlayer.pdf");
-//            return "Layer removed";
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return "Error";
-//        }
-//    }
 }
