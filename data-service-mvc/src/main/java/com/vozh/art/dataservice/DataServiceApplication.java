@@ -2,18 +2,13 @@ package com.vozh.art.dataservice;
 
 import com.vozh.art.dataservice.entity.*;
 import com.vozh.art.dataservice.repository.*;
-import com.vozh.art.dataservice.service.PdfService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
-import com.vozh.art.dataservice.entity.DataItem;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
