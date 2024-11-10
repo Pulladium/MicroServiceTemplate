@@ -17,7 +17,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>gateway-react</module>
-        <module>data-service-mvc-tmpl</module>
+        <module>data-service-mvc</module>
         <module>common-module</module>
         <module>eureka-server</module>
         <module>processing-service-mcv-tmpl</module>

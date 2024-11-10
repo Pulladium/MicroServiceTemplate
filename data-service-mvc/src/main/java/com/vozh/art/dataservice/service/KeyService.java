@@ -40,6 +40,7 @@ public class KeyService {
     public void init() throws Exception {
         Security.addProvider(new BouncyCastleProvider());
         keyStore = KeyStore.getInstance("PKCS12", "BC");
+
         try (FileInputStream fis = new FileInputStream(keystorePath)) {
             keyStore.load(fis, keystorePassword.toCharArray());
         } catch (FileNotFoundException e) {
@@ -55,7 +56,7 @@ public class KeyService {
 
         keyStore.setKeyEntry(alias, keyPair.getPrivate(), keystorePassword.toCharArray(), new Certificate[]{certificate});
 
-        //
+
         try (FileOutputStream fos = new FileOutputStream(keystorePath)) {
             keyStore.store(fos, keystorePassword.toCharArray());
         }

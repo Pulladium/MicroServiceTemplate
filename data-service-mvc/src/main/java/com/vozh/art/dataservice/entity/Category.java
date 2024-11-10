@@ -16,11 +16,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Category extends BaseEntity<Long> {
+
     private String description;
 
-
     @ManyToMany(mappedBy = "categories")
-    private Set<Certificate> certificates ;
+    private Set<Certificate> certificates;
 
     @ManyToOne
     @JoinColumn(name = "parent_category_id")

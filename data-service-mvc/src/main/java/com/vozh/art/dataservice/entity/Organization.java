@@ -26,13 +26,14 @@ public class Organization extends BaseEntity<Long>{
     private String name;
 
     private String address;
-    private String ContactInfo;
+
+    private String contactInfo;
 
     private OrganizationStatus status;
 
     private String mantainerKeycloakUUID;
 
-    enum OrganizationStatus{
+    public enum OrganizationStatus{
         APPROVED,
         REJECTED,
         AWAITING
