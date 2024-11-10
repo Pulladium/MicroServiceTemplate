@@ -31,7 +31,7 @@ public class Organization extends BaseEntity<Long>{
 
     private OrganizationStatus status;
 
-    private String mantainerKeycloakUUID;
+    private String maintainerKeycloakUUID;
 
     public enum OrganizationStatus{
         APPROVED,

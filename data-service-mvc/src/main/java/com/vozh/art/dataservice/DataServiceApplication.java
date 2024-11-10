@@ -1,10 +1,7 @@
 package com.vozh.art.dataservice;
 
 import com.vozh.art.dataservice.entity.*;
-import com.vozh.art.dataservice.repository.CategoryRepository;
-import com.vozh.art.dataservice.repository.CertificateRepository;
-import com.vozh.art.dataservice.repository.DataItemRepository;
-import com.vozh.art.dataservice.repository.OrganizationRepository;
+import com.vozh.art.dataservice.repository.*;
 import com.vozh.art.dataservice.service.PdfService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +27,12 @@ public class DataServiceApplication {
     }
 
     @Bean
-    public CommandLineRunner createCertificate(CertificateRepository certificateRepository, CategoryRepository categoryRepository, OrganizationRepository organizationRepository){
+    public CommandLineRunner createCertificate(CertificateRepository certificateRepository,
+                                               CategoryRepository categoryRepository,
+                                               OrganizationRepository organizationRepository,
+                                               CertificateParticipantRepo certificateParticipantRepo,
+                                               ParticipantRepository participantRepository
+    ){
 
         return args -> {
             Category category = Category.builder()
@@ -42,19 +44,31 @@ public class DataServiceApplication {
                     .parentCategory(category)
                     .build();
 
-            categoryRepository.saveAll(List.of(category,subCategory));
+            category.setSubCategories(Set.of(subCategory));
+            subCategory.setParentCategory(category);
+
 
             Organization organization = Organization.builder()
                     .name("NOT CTU")
                     .address("Terronska 2228")
-                    .mantainerKeycloakUUID("Not seeted")
+                    .maintainerKeycloakUUID("Not seeted")
                     .status(Organization.OrganizationStatus.APPROVED)
                     .contactInfo("blablabla.der@gmail.com")
                     .build();
 
-            organizationRepository.save(organization);
 
 
+            Participant participant = Participant.builder()
+                    .name("Jonh")
+                    .surname("Svoboda")
+                    .email("jouk.as@mail.cz")
+                    .build();
+
+            CertificateParticipant certificateParticipant = CertificateParticipant.builder()
+                    .participant(participant)
+                    .build();
+
+            participant.setCertificateParticipants(Set.of(certificateParticipant));
 
             Certificate certificate = Certificate.builder()
                     .description("Java Persistence qualification certificate")
@@ -63,7 +77,13 @@ public class DataServiceApplication {
                     .signedDocumentUUID(Set.of(new SingedDocRef("NOT YET")))
                     .build();
 
-            log.info("Cert id : {}", certificate.getId());
+            certificateParticipant.setCertificate(certificate);
+
+
+            participantRepository.save(participant);
+            certificateParticipantRepo.save(certificateParticipant);
+            categoryRepository.saveAll(List.of(category,subCategory));
+            organizationRepository.save(organization);
             Certificate savedCert = certificateRepository.save(certificate);
             log.info("Cert id after save : {}", savedCert.getId());
         };

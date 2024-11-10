@@ -1,5 +1,6 @@
 package com.vozh.art.dataservice.controller;
 
+import com.vozh.art.dataservice.dto.response.CertificateResponse;
 import com.vozh.art.dataservice.entity.Certificate;
 import com.vozh.art.dataservice.service.CertificateService;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +17,12 @@ public class CertificateController {
 
 
     private final CertificateService certificateService;
-    //todo better use DTOs
     @GetMapping("{id}")
-    public ResponseEntity<Certificate> getCertificates(@PathVariable Long id) {
+    public ResponseEntity<CertificateResponse> getCertificates(@PathVariable Long id) {
         log.info("Getting certificates for user with id: {}", id);
-        return ResponseEntity.ok(certificateService.getById(id));
+
+        return ResponseEntity.ok(CertificateService.
+                mapToResponse(certificateService.getById(id)));
     }
 
     @GetMapping("/ping")

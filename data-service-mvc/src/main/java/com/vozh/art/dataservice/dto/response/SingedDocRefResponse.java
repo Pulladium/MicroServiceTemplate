@@ -9,4 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class SingedDocRefResponse {
+    private Long singedDocRefId;
+    private String uuidOfDoc;
 }

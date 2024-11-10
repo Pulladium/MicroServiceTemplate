@@ -16,4 +16,8 @@ import java.util.Set;
 public class Participant extends BaseEntity<Long>{
     @OneToMany(mappedBy = "participant")
     private Set<CertificateParticipant> certificateParticipants;
+
+    private String name;
+    private String surname;
+    private String email;
 }

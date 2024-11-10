@@ -21,7 +21,6 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-//    recursing infinite loop
     public static CategoryResponse mapToResponse(Category category, int depth) {
         if (category == null || depth < 0) {
             return null;

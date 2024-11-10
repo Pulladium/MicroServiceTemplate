@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +38,12 @@ public class CertificateService {
         return CertificateResponse.builder()
                 .certificateId(certificate.getId())
                 .description(certificate.getDescription())
-                .categories(certificate.getCategories())
+                .issuers(certificate.getIssuers().stream()
+                        .map(issuer -> OrganizationService.mapToResponse(issuer))
+                        .collect(Collectors.toSet()))
+                .categories(certificate.getCategories().stream()
+                        .map(category -> CategoryService.mapToResponse(category ,1))
+                        .collect(Collectors.toSet()))
                 .build();
     }
 

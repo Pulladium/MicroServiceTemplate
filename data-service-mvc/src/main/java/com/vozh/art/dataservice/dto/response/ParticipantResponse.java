@@ -9,4 +9,5 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class ParticipantResponse {
+    private Long participantId;
 }
