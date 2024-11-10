@@ -1,4 +1,4 @@
-package com.vozh.art.dataservice.entity;
+package com.vozh.art.dataservice.entity.mongoDoc;
 
 
 import jakarta.persistence.GeneratedValue;

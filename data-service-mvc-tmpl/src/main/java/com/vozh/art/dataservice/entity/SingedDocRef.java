@@ -2,14 +2,11 @@ package com.vozh.art.dataservice.entity;
 
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -17,13 +14,8 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CertificateParticipant extends BaseEntity<Long>{
+public class SingedDocRef extends BaseEntity<Long> {
 
-    @ManyToOne
-    private Certificate certificate;
+    private String uuidOfDoc;
 
-    @ManyToOne
-    private Participant participant;
-
-    private LocalDateTime assignDate;
 }

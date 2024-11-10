@@ -1,12 +1,19 @@
 package com.vozh.art.dataservice.service;
 
-import com.itextpdf.kernel.pdf.*;
+
+import com.itextpdf.kernel.colors.ColorConstants;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
-import com.itextpdf.kernel.pdf.layer.PdfLayer;
+import com.itextpdf.kernel.pdf.canvas.parser.listener.IPdfTextLocation;
 import com.itextpdf.layout.Canvas;
+import com.itextpdf.layout.element.Text;
+import lombok.RequiredArgsConstructor;
+
+import com.itextpdf.kernel.pdf.*;
+import com.itextpdf.kernel.pdf.layer.PdfLayer;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
-import lombok.RequiredArgsConstructor;
+import com.itextpdf.layout.properties.Property;
+
 
 import org.springframework.stereotype.Service;
 
@@ -18,57 +25,46 @@ import java.io.IOException;
 public class PdfService {
     private static final String PERSONAL_DATA_LAYER = "PersonalData";
 
+
     public void createPDFWithLayer(String outputPath, String name, String surname) throws IOException {
         try (PdfDocument pdfDoc = new PdfDocument(new PdfWriter(outputPath))) {
             Document document = new Document(pdfDoc);
 
             // Create layer for personal data
             PdfLayer personalDataLayer = new PdfLayer(PERSONAL_DATA_LAYER, pdfDoc);
+            personalDataLayer.setOn(true);
 
-            // Create PdfCanvas for the page
-            PdfCanvas pdfCanvas = new PdfCanvas(pdfDoc.addNewPage());
+            // Create PdfCanvas for the layer
+            PdfCanvas canvas = new PdfCanvas(pdfDoc.addNewPage());
+            canvas.beginLayer(personalDataLayer);
 
-            // Add content to personal data layer
-            pdfCanvas.beginLayer(personalDataLayer);
+            // Add personal data
+            document.add(new Paragraph("--- Personal Data Start ---"));
             document.add(new Paragraph("Name: " + name));
             document.add(new Paragraph("Surname: " + surname));
-            pdfCanvas.endLayer();
+            document.add(new Paragraph("--- Personal Data End ---"));
 
-            // Add other content (not in the personal data layer)
+            canvas.endLayer();
+
+            Text title = new Text("try 2 delete me").setFontSize(15);
+            document.add(new Paragraph(title));
+
+            // Add other content
             document.add(new Paragraph("Main document content"));
-
-            document.close();
         }
     }
+
     public void removePersonalDataLayer(String inputPath, String outputPath) throws IOException {
-        try (PdfDocument pdfDoc = new PdfDocument(
-                new PdfReader(inputPath),
-                new PdfWriter(outputPath))) {
+        CompositeCleanupStrategy strategy = new CompositeCleanupStrategy();
+        strategy.add(new RegexBasedCleanupStrategy("Baeldung").setRedactionColor(ColorConstants.WHITE));
+        PdfCleaner.autoSweepCleanUp(pdfDocument, strategy);
 
-            // Get the OCG (Optional Content Group) properties
-            PdfDictionary catalog = pdfDoc.getCatalog().getPdfObject();
-            PdfDictionary ocProperties = catalog.getAsDictionary(PdfName.OCProperties);
-
-            if (ocProperties != null) {
-                // Get the OCGs (Optional Content Groups)
-                PdfArray ocgs = ocProperties.getAsArray(PdfName.OCGs);
-                if (ocgs != null) {
-                    // Find and disable the personal data layer
-                    for (int i = 0; i < ocgs.size(); i++) {
-                        PdfDictionary ocg = ocgs.getAsDictionary(i);
-                        if (PERSONAL_DATA_LAYER.equals(ocg.getAsString(PdfName.Name).toString())) {
-                            // Set the layer visibility to false
-                            PdfDictionary usage = new PdfDictionary();
-                            usage.put(PdfName.Print, new PdfName("OFF"));
-                            usage.put(PdfName.View, new PdfName("OFF"));
-                            ocg.put(PdfName.Usage, usage);
-                            break;
-                        }
-                    }
-                }
-            }
-
-            pdfDoc.close();
+        for (IPdfTextLocation location : strategy.getResultantLocations()) {
+            PdfPage page = pdfDocument.getPage(location.getPageNumber() + 1);
+            PdfCanvas pdfCanvas = new PdfCanvas(page.newContentStreamAfter(), page.getResources(), page.getDocument());
+            Canvas canvas = new Canvas(pdfCanvas, location.getRectangle());
+            canvas.add(new Paragraph("HIDDEN").setFontSize(8)
+                    .setMarginTop(0f));
         }
     }
 }

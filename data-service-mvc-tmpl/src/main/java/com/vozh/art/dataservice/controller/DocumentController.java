@@ -2,14 +2,12 @@ package com.vozh.art.dataservice.controller;
 
 
 import com.vozh.art.dataservice.dto.DocWithFile;
-import com.vozh.art.dataservice.entity.SignedDoc;
+import com.vozh.art.dataservice.entity.mongoDoc.SignedDoc;
 import com.vozh.art.dataservice.service.DocService;
 import com.vozh.art.dataservice.service.KeyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FilenameUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

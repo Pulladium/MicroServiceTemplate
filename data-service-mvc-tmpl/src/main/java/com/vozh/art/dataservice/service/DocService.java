@@ -1,7 +1,7 @@
 package com.vozh.art.dataservice.service;
 
 import com.vozh.art.dataservice.dto.DocWithFile;
-import com.vozh.art.dataservice.entity.SignedDoc;
+import com.vozh.art.dataservice.entity.mongoDoc.SignedDoc;
 import com.vozh.art.dataservice.repository.mDB.DocRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
@@ -113,20 +113,6 @@ public class DocService {
         return new DocWithFile(document, content);
     }
 
-
-//    public DocumentWithContent getDocumentWithContent(String id) throws IOException {
-//        SignedDoc document = signedDocumentRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Document not found"));
-//
-//        try {
-//            InputStreamResource fileContent = gridFSService.retrieveFile(document.getGridFsFileId());
-//            byte[] content = IOUtils.toByteArray(fileContent.getInputStream());
-//
-//            return new DocumentWithContent(document, content);
-//        } catch (IOException e) {
-//            throw new RuntimeException("Error retrieving file from GridFS", e);
-//        }
-//    }
 
 
     public boolean verifyDocument(MultipartFile file, String publicKey, String signature) throws Exception {

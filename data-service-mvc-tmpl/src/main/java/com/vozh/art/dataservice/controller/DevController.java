@@ -27,4 +27,15 @@ public class DevController {
             return "Error";
         }
     }
+
+    @GetMapping("/removeLayerPD")
+    public String removeLayerPD() {
+        try {
+            pdfService.removePersonalDataLayer("pdfs/layeroutput.pdf", "pdfs/outwithoutlayer.pdf");
+            return "Layer removed";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error";
+        }
+    }
 }
